@@ -7,5 +7,5 @@ class Task(models.Model):
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(auto_now=True)
 
-    # def __str__(self) -> str:
-    #     return self.task
+    def __str__(self) -> str:
+        return self.task

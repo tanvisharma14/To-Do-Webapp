@@ -25,9 +25,9 @@
                         <div class="card-body">
                             {{t.task}}
                             <span style="position: relative; float: right;">
-                                <a class="btn btn-success"><i class="fa fa-check"></i> Mark as Done</a>
-                                <a class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                                <a class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                                <a href="{% url 'markAsDone' t.pk %}" class="btn btn-success"><i class="fa fa-check"></i> Mark as Done</a>
+                                <a href="{% url 'deleteTask' t.pk %}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                <a href="{% url 'editTask' t.pk %}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
                             </span>
                         </div>
                     </div>
@@ -35,12 +35,15 @@
             </div>
             <div class="col-md-5 col-lg-5">
                 <h5>Completed Tasks</h5>
-                <!--List of all the tasks that have completed-->
-                <div class="card-m1">
-                    <div class="card-body">
-                        This is the completed task.
+                <!-- List of all the tasks that have completed -->
+                {% for c in completedTasks %}
+                    <div class="card m-1">
+                        <div class="card-body">
+                            {{c.task}} 
+                            <a href="{% url 'markAsUndone' c.pk %}" class="btn btn-warning" style="float: right;">Mark as Undone</a>
+                        </div>    
                     </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
         <div class="row">
@@ -51,7 +54,7 @@
                     <div class="form-group">
                         <span style="display: flex;">
                             <input type="text" name="task" class="form-control" placeholder="Add a task">&nbsp;
-                            <button type="submit" class="btn btn-primary" style="width: 200px;"><i class="fa fa-plus"></i>Add</button>
+                            <button type="submit" class="btn btn-primary" style="width: 200px;"><i class="fa fa-plus">&nbsp;</i>Add</button>
                         </span>
                     </div>
                 </form>
